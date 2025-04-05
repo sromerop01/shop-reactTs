@@ -11,12 +11,12 @@ const Navbar = () => {
 
     useEffect(() => {
         const category = location.pathname.split('/').pop(); 
-        if (category === '') {
+        if (category === "") {
             setSearchByCategory(null);  // Resetear si es la página principal
         } else {
-            setSearchByCategory(category);
+            setSearchByCategory(category || "");  // Añadir fallback para cuando es undefined
         }
-    }, [location.pathname]);
+    }, [location.pathname, setSearchByCategory]);
 
     const activeStyle: string = 'underline underline-offset-4';
     // const currentPath = window.location.pathname

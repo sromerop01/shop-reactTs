@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { ShoppingCardContext } from '../../Context'
 
 import Layout from '../../Components/Layout'
@@ -7,12 +7,7 @@ import ProductDetail from '../../Components/ProductDetail'
 
 function Home() {
   const context = useContext(ShoppingCardContext)
-  const { setSearchByTitle, filteredItems, searchByCategory } = context
-
-  // useEffect(() => {
-  //   console.log('Categoría seleccionada:', searchByCategory);
-  //   console.log('Productos filtrados:', filteredItems);
-  // }, [searchByCategory, filteredItems]);
+  const { setSearchByTitle, filteredItems } = context
 
   const renderView = () => {
     if (filteredItems?.length > 0) {
