@@ -40,7 +40,7 @@ type ShoppingCardContextType ={
 
 
 
-export const ShoppingCardContext = createContext<ShoppingCardContextType>()
+export const ShoppingCardContext = createContext<ShoppingCardContextType>({} as ShoppingCardContextType);
 
 export const ShoppingCardProvider = ({ children } : { children: ReactNode }) => {
     //Shopping Cart
