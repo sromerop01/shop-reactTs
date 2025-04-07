@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState, useCallback } from 'react';
 
 type Product = {
     id: number;
@@ -104,47 +104,63 @@ export const ShoppingCardProvider = ({ children } : { children: ReactNode }) => 
     //Filtered by title
     const [filteredItems, setFilteredItems] = useState<Product[]>([]);
     const filteredItemsByTitle = (items: Product[] | null, searchByTitle: string | null) => {
+      if (!items || !searchByTitle) return items || [];
       return items.filter(item => item.title?.toLowerCase().includes(searchByTitle.toLowerCase()));
     };
 
     //Filtered by Category
-    // const [filteredItems, setFilteredItems] = useState<Product[]>([]);
     const filteredItemsByCategory = (items: Product[] | null, searchByCategory: string | null) => {
       if (!searchByCategory || !items) return items || [];
       return items.filter(item => item.category?.toLowerCase().includes(searchByCategory.toLowerCase()));
     };
 
-    const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
-      if (searchType === 'BY_TITLE') {
-        return filteredItemsByTitle(items, searchByTitle)
-      }
-  
-      if (searchType === 'BY_CATEGORY') {
-        return filteredItemsByCategory(items, searchByCategory)
-      }
-  
-      if (searchType === 'BY_TITLE_AND_CATEGORY') {
-        return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
-      }
-  
-      if (!searchType) {
-        return items
-      }
-    }
+// Define primero los tipos adecuados
+type SearchType = 'BY_TITLE' | 'BY_CATEGORY' | 'BY_TITLE_AND_CATEGORY' | undefined;
 
-    useEffect(() => {
-      if (!items) return;
-    
-      if (searchByTitle && searchByCategory) {
-        setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory));
-      } else if (searchByTitle) {
-        setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory));
-      } else if (searchByCategory) {
-        setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory));
-      } else {
-        setFilteredItems(items);
-      }
-    }, [items, searchByTitle, searchByCategory]);
+// Usa useCallback para evitar redefinir la función en cada renderizado
+const filterBy = useCallback((
+  searchType: SearchType, 
+  items: Product[] | null, 
+  searchByTitle: string | null, 
+  searchByCategory: string | null
+): Product[] => {  // Nota: ahora devuelve Product[] en lugar de Product[] | null
+  if (!items) return [];  // Siempre devuelve un array, nunca null
+  
+  if (searchType === 'BY_TITLE') {
+    return filteredItemsByTitle(items, searchByTitle) || [];
+  }
+
+  if (searchType === 'BY_CATEGORY') {
+    return filteredItemsByCategory(items, searchByCategory) || [];
+  }
+
+  if (searchType === 'BY_TITLE_AND_CATEGORY') {
+    const filteredByCategory = filteredItemsByCategory(items, searchByCategory) || [];
+    return searchByTitle 
+      ? filteredByCategory.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+      : filteredByCategory;
+  }
+
+  return items;  // Por defecto, devuelve los items sin filtrar
+}, []);
+
+// Ahora corrige el useEffect
+useEffect(() => {
+  if (!items) {
+    setFilteredItems([]);
+    return;
+  }
+
+  if (searchByTitle && searchByCategory) {
+    setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory));
+  } else if (searchByTitle) {
+    setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory));
+  } else if (searchByCategory) {
+    setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory));
+  } else {
+    setFilteredItems(items);
+  }
+}, [items, searchByTitle, searchByCategory, filterBy]);
 
     return(
         <ShoppingCardContext.Provider value={{
