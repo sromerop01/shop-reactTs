@@ -5,7 +5,7 @@ type OrderCardProps = {
     title: string,
     imageUrl: string,
     price: number,
-    handleDelete: (id: number) => void,
+    handleDelete?: (id: number) => void,
 };
 
 const OrderCard: React.FC<OrderCardProps> = ({ id, title, imageUrl, price, handleDelete }) => {
