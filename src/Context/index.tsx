@@ -1,46 +1,12 @@
 import { ReactNode, createContext, useEffect, useState, useCallback } from 'react';
-
-type Product = {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    image: string;
-    category: string;
-}
-
-type Order = {
-    date: string,
-    products: Product[],
-    totalProducts: number,
-    totalPrice: number
-}
-
-type ShoppingCardContextType ={
-    count: number,
-    setCount: React.Dispatch<React.SetStateAction<number>>,
-    isProductDetailOpen: boolean,
-    toggleProductDetail: () => void,
-    productToShow: Product;
-    setProductToShow: React.Dispatch<React.SetStateAction<Product>>,
-    cartProducts: Product[],
-    setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>,
-    isCheckoutSideMenu: boolean,
-    toggleCheckoutSideMenu: () => void,
-    order: Order[],
-    setOrder: React.Dispatch<React.SetStateAction<Order[]>>,
-    items: Product[] | null,
-    searchByTitle: string | null,
-    setSearchByTitle: React.Dispatch<React.SetStateAction<string | null>>,
-    filteredItems: Product[],
-    searchByCategory: string | null,
-    setSearchByCategory: React.Dispatch<React.SetStateAction<string | null>>
-    
-}
-
-
+import { Product, Order, ShoppingCardContextType } from '../types/types';
 
 export const ShoppingCardContext = createContext<ShoppingCardContextType>({} as ShoppingCardContextType);
+
+export const initializeLocalStorage = () =>{
+  const accountInLocalStorage = localStorage.getItem('account')
+}
+
 
 export const ShoppingCardProvider = ({ children } : { children: ReactNode }) => {
     //Shopping Cart
