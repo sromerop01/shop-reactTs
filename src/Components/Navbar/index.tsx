@@ -5,9 +5,21 @@ import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
     const context = useContext(ShoppingCardContext)
-    const { cartProducts, setSearchByCategory } = context;
-
+    const { cartProducts, setSearchByCategory, signOut,setSignOut } = context;
     const location = useLocation();
+
+    //SignOut
+    const signOutNavBar = localStorage.getItem('sign-out')
+    const parsedSignOut = JSON.parse(signOutNavBar ?? 'false')
+    const isUserSignOut = signOut || parsedSignOut
+    console.log(isUserSignOut)
+    
+
+    const handleSignOut = () =>{
+        const stringifiedSignOut = JSON.stringify(true)
+        localStorage.setItem('sign-out', stringifiedSignOut)
+        setSignOut(true)
+    }
 
     useEffect(() => {
         const category = location.pathname.split('/').pop(); 
@@ -19,6 +31,46 @@ const Navbar = () => {
     }, [location.pathname, setSearchByCategory]);
 
     const activeStyle: string = 'underline underline-offset-4';
+
+    const renderView = () =>{
+        if (isUserSignOut) {
+            return (
+                <li>
+                    <NavLink
+                        to='/sign-in'
+                        className={({ isActive }: { isActive: boolean }) =>
+                            isActive ? activeStyle : undefined}
+                        onClick={() => handleSignOut()}
+                    >
+                        Sign in
+                    </NavLink>
+                </li>
+            )
+        } else {
+            return(
+                <>
+                <li className='text-white/70'>sromerop2001@gmail.com</li>
+                {[
+                    { path: '/my-orders', label: 'My Orders' },
+                    { path: '/my-account', label: 'My Account' },
+                    { path: '/sign-in', label: 'Sign Out' },
+                    ].map(({ path, label }) => (
+                    <li key={path}>
+                        <NavLink
+                        to={path}
+                        onClick={label === 'Sign Out' ? handleSignOut : undefined}
+                        className={({ isActive }: { isActive: boolean }) =>
+                            isActive ? activeStyle : undefined
+                        }
+                        >
+                        {label}
+                        </NavLink>
+                    </li>
+                ))}
+            </>
+            )
+        }
+    }
 
     return(
         <nav className='flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-light top-0 shadow-md bg-sky-950 text-white'>
@@ -48,23 +100,7 @@ const Navbar = () => {
             </ul>
 
             <ul className='flex items-center gap-3'>
-                <li className='text-white/70'>sromerop2001@gmail.com</li>
-                {[
-                    { path: '/my-orders', label: 'My Orders' },
-                    { path: '/my-account', label: 'My Account' },
-                    { path: '/sign-in', label: 'Sign In' },
-                ].map(({ path, label }) => (
-                <li key={path}>
-                    <NavLink
-                    to={path}
-                    className={({ isActive }: { isActive: boolean }) =>
-                        isActive ? activeStyle : undefined
-                    }
-                    >
-                        {label}
-                    </NavLink>
-                </li>
-                ))}
+                {renderView()}
                 <li className='flex items-center'>
                     <ShoppingCartIcon className='h-6 w-6 text-sky-700'></ShoppingCartIcon>
                     <div>{cartProducts.length}</div>
