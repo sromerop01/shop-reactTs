@@ -1,7 +1,7 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react';
 import { Product, Order } from '../types/types';
 import { ShoppingCardContext } from './context';
-import { filteredItemsByTitle, filteredItemsByCategory, initializeLocalStorage } from '../Utils';
+import { filteredItemsByTitle, filteredItemsByCategory, initializeLocalStorage } from '../Utils/utils';
 
 interface Props {
   children: ReactNode;
@@ -9,7 +9,17 @@ interface Props {
 
 export const ShoppingCardProvider = ({ children }: Props) => {
     // Inicializar localStorage
-    initializeLocalStorage();
+    initializeLocalStorage()
+    //My account
+    const [account, setAccount] = useState({
+      name: '',
+      email: '',
+      password: ''
+    })
+
+    //Sign Out
+    const [signOut, setSignOut] = useState(false)
+
 
     //Shopping Cart
     //Increment quality
@@ -137,7 +147,11 @@ export const ShoppingCardProvider = ({ children }: Props) => {
             setSearchByTitle,
             filteredItems,
             searchByCategory,
-            setSearchByCategory
+            setSearchByCategory,
+            account,
+            setAccount,
+            signOut,
+            setSignOut
         }}>
             {children}
         </ShoppingCardContext.Provider>

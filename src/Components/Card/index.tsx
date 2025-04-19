@@ -2,27 +2,9 @@ import React from "react";
 import { useContext } from "react";
 import { ShoppingCardContext } from "../../Context/context";
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
+import { Product } from "../../types/types";
 
-type CardProps = {
-  id: number,
-  title: string,
-  price: number,
-  category: string,
-  image: string,
-  description: string
-}
-
-type Product = {
-  id: number,
-  title: string,
-  price: number,
-  category: string,
-  image: string,
-  description: string
-}
-
-
-const Card: React.FC<CardProps> = ({id, title, price, category, image, description }) => {
+const Card: React.FC<Product> = ({id, title, price, category, image, description }) => {
   const context = useContext(ShoppingCardContext)
   const { count, setCount, toggleProductDetail,isProductDetailOpen, setProductToShow, cartProducts, setCartProducts, toggleCheckoutSideMenu,isCheckoutSideMenu} = context
 

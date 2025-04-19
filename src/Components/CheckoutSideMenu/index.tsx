@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCardContext } from "../../Context/context";
 import OrderCard from '../OrderCard';
-import { totalPrice } from '../../Utils';
+import { totalPrice } from '../../Utils/utils';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 
 
@@ -47,7 +47,7 @@ const CheckoutSideMenu = () => {
                         key={product.id}
                         id={product.id}
                         title={product.title}
-                        imageUrl={product.image}
+                        image={product.image}
                         price={product.price}
                         handleDelete={handleDelete}
                     />

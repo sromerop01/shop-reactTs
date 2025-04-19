@@ -19,8 +19,6 @@ const Navbar = () => {
     }, [location.pathname, setSearchByCategory]);
 
     const activeStyle: string = 'underline underline-offset-4';
-    // const currentPath = window.location.pathname
-    // const category = currentPath.substring(currentPath.lastIndexOf('/') + 1)
 
     return(
         <nav className='flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-light top-0 shadow-md bg-sky-950 text-white'>

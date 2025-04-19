@@ -37,7 +37,7 @@ function MyOrder() {
                 key={product.id}
                 id={product.id}
                 title={product.title}
-                imageUrl={product.image}
+                image={product.image}
                 price={product.price}
                 
             />

@@ -1,39 +1,70 @@
+// types.ts
+
 import { Dispatch, SetStateAction } from 'react';
 
-export type Product = {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    image: string;
-    category: string;
+// Utilidad para no repetir Dispatch<SetStateAction<T>>
+export type Setter<T> = Dispatch<SetStateAction<T>>;
+
+// Interfaces para objetos base
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  category: string;
 }
 
-export type Order = {
-    date: string,
-    products: Product[],
-    totalProducts: number,
-    totalPrice: number
+export type OrderCardProps = Omit<Product, 'description' | 'category'> & {
+  handleDelete?: (id: number) => void;
+};
+
+export interface Order {
+  date: string;
+  products: Product[];
+  totalProducts: number;
+  totalPrice: number;
 }
 
-export type ShoppingCardContextType ={
-    count: number,
-    setCount: Dispatch<SetStateAction<number>>,
-    isProductDetailOpen: boolean,
-    toggleProductDetail: () => void,
-    productToShow: Product;
-    setProductToShow: Dispatch<SetStateAction<Product>>,
-    cartProducts: Product[],
-    setCartProducts: Dispatch<SetStateAction<Product[]>>,
-    isCheckoutSideMenu: boolean,
-    toggleCheckoutSideMenu: () => void,
-    order: Order[],
-    setOrder: Dispatch<SetStateAction<Order[]>>,
-    items: Product[] | null,
-    searchByTitle: string | null,
-    setSearchByTitle: Dispatch<SetStateAction<string | null>>,
-    filteredItems: Product[],
-    searchByCategory: string | null,
-    setSearchByCategory: Dispatch<SetStateAction<string | null>>
-    
+export interface Account {
+  name: string;
+  email: string;
+  password: string;
+  // Agrega más propiedades según lo que necesites guardar
+}
+
+// Interfaces para estados del contexto
+export interface UIState {
+  isProductDetailOpen: boolean;
+  toggleProductDetail: () => void;
+  isCheckoutSideMenu: boolean;
+  toggleCheckoutSideMenu: () => void;
+}
+
+export interface CartState {
+  cartProducts: Product[];
+  setCartProducts: Setter<Product[]>;
+  order: Order[];
+  setOrder: Setter<Order[]>;
+}
+
+export interface ProductState {
+  productToShow: Product;
+  setProductToShow: Setter<Product>;
+  items: Product[] | null;
+  filteredItems: Product[];
+  searchByTitle: string | null;
+  setSearchByTitle: Setter<string | null>;
+  searchByCategory: string | null;
+  setSearchByCategory: Setter<string | null>;
+}
+
+// Estado principal del contexto de la app (Shopping Cart)
+export interface ShoppingCartContextType extends UIState, CartState, ProductState {
+  count: number;
+  setCount: Setter<number>;
+  account: Account;
+  setAccount: Setter<Account>;
+  signOut: boolean;
+  setSignOut: Setter<boolean>;
 }

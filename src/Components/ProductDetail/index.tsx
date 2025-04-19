@@ -22,11 +22,6 @@ const ProductDetail = () => {
             </div>
             <figure className='px-6'>
                 {productToShow.image ? <img src={productToShow.image} alt={productToShow.title} /> : null}
-                {/* <img 
-                className='w-full h-full rounded-lg' 
-                src={productToShow.image} 
-                alt={productToShow.title}
-                /> */}
             </figure>
             <p className='flex flex-col p-6'>
                 <span className='font-medium text-2xl'>${productToShow.price}</span>
