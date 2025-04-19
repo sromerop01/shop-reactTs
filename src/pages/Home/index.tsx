@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ShoppingCardContext } from '../../Context'
+import { ShoppingCardContext } from "../../Context/context";
 
 import Layout from '../../Components/Layout'
 import Card from '../../Components/Card'

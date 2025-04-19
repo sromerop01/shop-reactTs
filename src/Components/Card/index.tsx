@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { ShoppingCardContext } from "../../Context";
+import { ShoppingCardContext } from "../../Context/context";
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
 
 type CardProps = {

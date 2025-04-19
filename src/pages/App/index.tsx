@@ -1,5 +1,5 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
-import { ShoppingCardProvider } from '../../Context'
+import { ShoppingCardProvider } from '../../Context/shoppingCardProvider'
 
 import Home from '../Home'
 import MyAccount from '../MyAccount'
