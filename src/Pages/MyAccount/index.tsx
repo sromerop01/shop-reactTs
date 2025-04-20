@@ -1,7 +1,8 @@
 import { useContext, useState, useRef } from "react"
+import { Link } from "react-router-dom";
 import { ShoppingCartContext } from "../../Context/context"
 import Layout from "../../Components/Layout"
-
+import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid';
 
 function MyAccount() {
   const { setAccount } = useContext(ShoppingCartContext)
@@ -95,8 +96,15 @@ function MyAccount() {
   return (
     <>
       <Layout>
-      <h1 className="font-medium text-xl text-center mb-6 w-80">My account</h1>
-      {renderView()}
+        <div className='flex items-center justify-center relative w-80 mb-6 '>
+          <Link to='/' className='absolute left-0'>
+            <ChevronDoubleLeftIcon
+              className="h-6 w-6 text-black cursor-pointer "
+            />
+          </Link>
+          <h1 className='font-medium text-xl'>My account</h1>
+        </div>
+        {renderView()}
       </Layout>
     </>
   )
