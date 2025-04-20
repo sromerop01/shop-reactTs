@@ -1,13 +1,14 @@
-import { useContext, useState } from "react"
-import { Link } from "react-router-dom"
+import { useContext, useState, useRef } from "react"
+import { Link, Navigate } from "react-router-dom"
 import { ShoppingCartContext } from "../../Context/context"
 import Layout from "../../Components/Layout"
 
 
 function SignIn() {
   const context = useContext(ShoppingCartContext)
-  const {account} = context
+  const {account, setAccount, setSignOut} = context
   const [view, setView] = useState('user-info')
+  const form = useRef(null)
 
   //Account
   const accountSignIn = localStorage.getItem('account')
@@ -16,6 +17,28 @@ function SignIn() {
   const noAccountInlocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
   const noAccountInlocalState = account ? Object.keys(account).length === 0 : true
   const hasUserAnAccount = !noAccountInlocalStorage || !noAccountInlocalState
+
+  const handleSignIn = () => {
+    const stringifiedSignOut = JSON.stringify(false)
+    localStorage.setItem('sign-out', stringifiedSignOut)
+    setSignOut(false)
+
+    return <Navigate replace to={'/'}/>
+  }
+
+  const createAnAccount = () => {
+    const formData = form.current ? new FormData(form.current) : new FormData()
+    const data = {
+      name: String(formData.get('name') || ''),
+      email: String(formData.get('email') || ''),
+      password: String(formData.get('password') || '')
+    }
+    const stringifiedAccount = JSON.stringify(data)
+    localStorage.setItem('account', stringifiedAccount)
+    setAccount(data)
+    handleSignIn()
+  }
+
 
   const renderLogin = () => {
     return(
@@ -50,7 +73,53 @@ function SignIn() {
   }
 
   const renderCreateUserInfo = () => {
-    //TODO
+    return(
+      <form ref={form} className='flex flex-col gap-4 w-80'>
+        <div className='flex flex-col gap-1'>
+          <label htmlFor='name' className='font-light text-sm'>Your name:</label>
+          <input 
+            type='text'
+            id='name'
+            name='name'
+            defaultValue={parsedAccount?.name}
+            placeholder='Santiago'
+            className='rounded-lg border border-sky-950 placeholder:font-light placeholder:text-sm
+                      placeholder:text-sky-950/60 focus:outline-none py-2 px-4'
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor='email' className='font-light text-sm'>Your email:</label>
+          <input 
+            type='text'
+            id='email'
+            name='email'
+            defaultValue={parsedAccount?.email}
+            placeholder='example@example.com'
+            className='rounded-lg border border-sky-950 placeholder:font-light placeholder:text-sm
+                      placeholder:text-sky-950/60 focus:outline-none py-2 px-4'
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor='password' className='font-light text-sm'>Your password:</label>
+          <input 
+            type='text'
+            id='password'
+            name='password'
+            defaultValue={parsedAccount?.email}
+            placeholder='************'
+            className='rounded-lg border border-sky-950 placeholder:font-light placeholder:text-sm
+                      placeholder:text-sky-950/60 focus:outline-none py-2 px-4'
+          />
+        </div>
+        <Link to='/'>
+          <button 
+            className='bg-sky-950 text-white w-full rounded-lg py-3'
+            onClick={() => createAnAccount()}>
+            create
+          </button>
+        </Link>
+      </form>
+    )
   }
 
   const renderView = () => view === 'create-user-info' ? renderCreateUserInfo() : renderLogin()
