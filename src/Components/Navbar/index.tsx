@@ -12,7 +12,6 @@ const Navbar = () => {
     const signOutNavBar = localStorage.getItem('sign-out')
     const parsedSignOut = JSON.parse(signOutNavBar ?? 'false')
     const isUserSignOut = signOut || parsedSignOut
-    console.log(isUserSignOut)
     
 
     const handleSignOut = () =>{

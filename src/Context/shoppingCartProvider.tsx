@@ -69,7 +69,7 @@ export const ShoppingCartProvider = ({ children }: Props) => {
     }, []);
     
     if (error){
-      console.log(error);
+      // console.log(error);
     }
 
     //Get products by title
