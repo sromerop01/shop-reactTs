@@ -1,15 +1,13 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react';
 import { Product, Order } from '../Types/types';
 import { ShoppingCartContext } from './context';
-import { filteredItemsByTitle, filteredItemsByCategory, initializeLocalStorage } from '../Utils/utils';
+import { filteredItemsByTitle, filteredItemsByCategory } from '../Utils/utils';
 
 interface Props {
   children: ReactNode;
 }
 
 export const ShoppingCartProvider = ({ children }: Props) => {
-    // Inicializar localStorage
-    initializeLocalStorage()
     //My account
     const [account, setAccount] = useState({
       name: '',

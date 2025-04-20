@@ -14,8 +14,8 @@ export const initializeLocalStorage = () => {
   }
 
   if (!signOutInLocalStorage) {
-    localStorage.setItem('sign-out', JSON.stringify(false))
-    parsedSignOut = false
+    localStorage.setItem('sign-out', JSON.stringify(true))
+    parsedSignOut = true
   } else {
     parsedSignOut = JSON.parse(signOutInLocalStorage)
   }
