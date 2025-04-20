@@ -6,8 +6,7 @@ import Layout from '../../Components/Layout'
 import OrderCard from '../../Components/OrderCard';
 
 function MyOrder() {
-  const context = useContext(ShoppingCartContext)
-  const { order } = context
+  const { order } = useContext(ShoppingCartContext)
   
   const currentPath = window.location.pathname
   let index: string | number = currentPath.substring(currentPath.lastIndexOf('/') + 1)

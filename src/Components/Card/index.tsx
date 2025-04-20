@@ -5,8 +5,7 @@ import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
 import { Product } from "../../Types/types";
 
 const Card: React.FC<Product> = ({id, title, price, category, image, description }) => {
-  const context = useContext(ShoppingCartContext)
-  const { count, setCount, toggleProductDetail,isProductDetailOpen, setProductToShow, cartProducts, setCartProducts, toggleCheckoutSideMenu,isCheckoutSideMenu} = context
+  const { count, setCount, toggleProductDetail,isProductDetailOpen, setProductToShow, cartProducts, setCartProducts, toggleCheckoutSideMenu,isCheckoutSideMenu} = useContext(ShoppingCartContext)
 
   const showProduct = (ProductDetail: Product) => {
     if (isCheckoutSideMenu){

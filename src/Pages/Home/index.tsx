@@ -6,8 +6,7 @@ import Card from '../../Components/Card'
 import ProductDetail from '../../Components/ProductDetail'
 
 function Home() {
-  const context = useContext(ShoppingCartContext)
-  const { setSearchByTitle, filteredItems } = context
+  const { setSearchByTitle, filteredItems } = useContext(ShoppingCartContext)
 
   const renderView = () => {
     if (filteredItems?.length > 0) {

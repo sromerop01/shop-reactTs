@@ -4,8 +4,7 @@ import { ShoppingCartContext } from "../../Context/context";
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
-    const context = useContext(ShoppingCartContext)
-    const { cartProducts, setSearchByCategory, signOut, setSignOut, account } = context;
+    const { cartProducts, setSearchByCategory, signOut, setSignOut, account } = useContext(ShoppingCartContext)
     const location = useLocation();
 
     //SignOut
