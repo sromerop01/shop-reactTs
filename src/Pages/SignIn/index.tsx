@@ -1,6 +1,7 @@
 import { useContext, useState, useRef } from "react"
 import { Link, Navigate } from "react-router-dom"
 import { ShoppingCartContext } from "../../Context/context"
+import { initializeLocalStorage } from '../../Utils/utils';
 import Layout from "../../Components/Layout"
 
 
@@ -9,13 +10,12 @@ function SignIn() {
   const [view, setView] = useState('user-info')
   const form = useRef(null)
 
-  //Account
-  const accountLocalStorage = localStorage.getItem('account')
-  const parsedAccount = JSON.parse(accountLocalStorage || '{}')
-  //Has an Account
-  const noAccountInlocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
-  const noAccountInlocalState = account ? Object.keys(account).length === 0 : true
-  const hasUserAnAccount = !noAccountInlocalStorage || !noAccountInlocalState
+  const { parsedAccount } = initializeLocalStorage()
+
+  const noAccountInLocalStorage = Object.keys(parsedAccount).length === 0
+  const noAccountInLocalState = account ? Object.keys(account).length === 0 : true
+
+  const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
 
   const handleSignIn = () => {
     const stringifiedSignOut = JSON.stringify(false)

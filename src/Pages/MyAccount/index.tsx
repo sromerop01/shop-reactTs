@@ -1,15 +1,15 @@
 import { useContext, useState, useRef } from "react"
 import { Link } from "react-router-dom";
 import { ShoppingCartContext } from "../../Context/context"
+import { initializeLocalStorage } from "../../Utils/utils";
 import Layout from "../../Components/Layout"
 import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid';
 
 function MyAccount() {
   const { setAccount } = useContext(ShoppingCartContext)
   const [view, setView] = useState('user-info')
-  const accountLocalStorage = localStorage.getItem('account')
-    const parsedAccount = JSON.parse(accountLocalStorage || '{}')
-    const form = useRef(null)
+  const { parsedAccount } = initializeLocalStorage()
+  const form = useRef(null)
 
     const editAccount = () => {
       const formData = form.current ? new FormData(form.current) : new FormData()

@@ -1,25 +1,26 @@
 import { Product } from '../Types/types';
 
 export const initializeLocalStorage = () => {
-  const accountInLocalStorage = localStorage.getItem('account')
-  const signOutInLocalStorage = localStorage.getItem('sign-out')
+  const accountLocalStorage = localStorage.getItem('account')
+  const signOutLocalStorage = localStorage.getItem('sign-out')
   let parsedAccount
   let parsedSignOut
 
-  if (!accountInLocalStorage){
+  if (!accountLocalStorage){
     localStorage.setItem('account', JSON.stringify({}))
     parsedAccount ={}
   } else {
-    parsedAccount = JSON.parse(accountInLocalStorage)
+    parsedAccount = JSON.parse(accountLocalStorage)
   }
 
-  if (!signOutInLocalStorage) {
+  if (!signOutLocalStorage) {
     localStorage.setItem('sign-out', JSON.stringify(true))
     parsedSignOut = true
   } else {
-    parsedSignOut = JSON.parse(signOutInLocalStorage)
+    parsedSignOut = JSON.parse(signOutLocalStorage)
   }
 
+  return {parsedAccount, parsedSignOut}
 }
 
 export const filteredItemsByTitle = (items: Product[] | null, searchByTitle: string | null) => {

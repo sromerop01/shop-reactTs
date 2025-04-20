@@ -1,24 +1,20 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { ShoppingCartContext } from "../../Context/context";
+import { initializeLocalStorage } from '../../Utils/utils';
 import ShoppingCart from '../ShoppingCart';
 
 const Navbar = () => {
     const { setSearchByCategory, signOut, setSignOut, account } = useContext(ShoppingCartContext)
     const location = useLocation();
 
-    //SignOut
-    const signOutLocalStorage = localStorage.getItem('sign-out')
-    const parsedSignOut = JSON.parse(signOutLocalStorage ?? 'false')
+    const { parsedAccount, parsedSignOut } = initializeLocalStorage()
     const isUserSignOut = signOut || parsedSignOut
-    //Account
-    const accountLocalStorage = localStorage.getItem('account')
-    const parsedAccount = JSON.parse(accountLocalStorage || '{}')
-    //Has an Account
-    const noAccountInlocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
-    const noAccountInlocalState = account ? Object.keys(account).length === 0 : true
-    const hasUserAnAccount = !noAccountInlocalStorage || !noAccountInlocalState
 
+    const noAccountInLocalStorage = Object.keys(parsedAccount).length === 0
+    const noAccountInLocalState = account ? Object.keys(account).length === 0 : true
+
+    const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
 
     const handleSignOut = () =>{
         const stringifiedSignOut = JSON.stringify(true)

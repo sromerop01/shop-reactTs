@@ -2,6 +2,7 @@ import { Navigate, useRoutes } from "react-router-dom"
 import { useContext } from "react"
 import { ShoppingCartContext } from "../Context/context"
 import { RouteConfig } from "../Types/types"
+import { initializeLocalStorage } from "../Utils/utils"
 
 //Pages
 import Home from '../Pages/Home'
@@ -14,13 +15,7 @@ import NotFound from '../Pages/NotFound'
   
 const AppRoutes = () => {
     const { account, signOut } = useContext(ShoppingCartContext)
-    
-    //Account
-    const accountLocalStorage = localStorage.getItem('account')
-    const parsedAccount = JSON.parse(accountLocalStorage || '{}')
-    // Sign Out
-    const signOutLocalStorage = localStorage.getItem('sign-out')
-    const parsedSignOut = JSON.parse(signOutLocalStorage ?? 'false')
+    const { parsedAccount, parsedSignOut } = initializeLocalStorage()
     //Has an Account
     const noAccountInlocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
     const noAccountInlocalState = Object.keys(account).length === 0
