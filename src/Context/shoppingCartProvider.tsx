@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react';
-import { Product, Order } from '../types/types';
+import { Product, Order } from '../Types/types';
 import { ShoppingCartContext } from './context';
 import { filteredItemsByTitle, filteredItemsByCategory, initializeLocalStorage } from '../Utils/utils';
 

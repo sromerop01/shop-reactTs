@@ -1,4 +1,4 @@
-import { Product } from '../types/types';
+import { Product } from '../Types/types';
 
 export const initializeLocalStorage = () => {
   const accountInLocalStorage = localStorage.getItem('account')

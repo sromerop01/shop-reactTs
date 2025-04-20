@@ -1,4 +1,4 @@
 import { createContext } from 'react';
-import { ShoppingCartContextType } from '../types/types';
+import { ShoppingCartContextType } from '../Types/types';
 
 export const ShoppingCartContext = createContext<ShoppingCartContextType>({} as ShoppingCartContextType);

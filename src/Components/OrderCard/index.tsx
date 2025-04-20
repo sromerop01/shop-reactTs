@@ -1,5 +1,5 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
-import { OrderCardProps } from '../../types/types';
+import { OrderCardProps } from '../../Types/types';
 
 const OrderCard: React.FC<OrderCardProps> = ({ id, title, image, price, handleDelete }) => {
     return (

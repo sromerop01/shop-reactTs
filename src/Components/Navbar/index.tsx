@@ -5,14 +5,21 @@ import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
     const context = useContext(ShoppingCartContext)
-    const { cartProducts, setSearchByCategory, signOut,setSignOut } = context;
+    const { cartProducts, setSearchByCategory, signOut, setSignOut, account } = context;
     const location = useLocation();
 
     //SignOut
     const signOutNavBar = localStorage.getItem('sign-out')
     const parsedSignOut = JSON.parse(signOutNavBar ?? 'false')
     const isUserSignOut = signOut || parsedSignOut
-    
+    //Account
+    const accountSignIn = localStorage.getItem('account')
+    const parsedAccount = JSON.parse(accountSignIn || '{}')
+    //Has an Account
+    const noAccountInlocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+    const noAccountInlocalState = account ? Object.keys(account).length === 0 : true
+    const hasUserAnAccount = !noAccountInlocalStorage || !noAccountInlocalState
+
 
     const handleSignOut = () =>{
         const stringifiedSignOut = JSON.stringify(true)
@@ -32,20 +39,7 @@ const Navbar = () => {
     const activeStyle: string = 'underline underline-offset-4';
 
     const renderView = () =>{
-        if (isUserSignOut) {
-            return (
-                <li>
-                    <NavLink
-                        to='/sign-in'
-                        className={({ isActive }: { isActive: boolean }) =>
-                            isActive ? activeStyle : undefined}
-                        onClick={() => handleSignOut()}
-                    >
-                        Sign in
-                    </NavLink>
-                </li>
-            )
-        } else {
+        if (hasUserAnAccount && !isUserSignOut) {
             return(
                 <>
                 <li className='text-white/70'>sromerop2001@gmail.com</li>
@@ -68,6 +62,19 @@ const Navbar = () => {
                 ))}
             </>
             )
+        } else {
+            return (
+                <li>
+                    <NavLink
+                        to='/sign-in'
+                        className={({ isActive }: { isActive: boolean }) =>
+                            isActive ? activeStyle : undefined}
+                        onClick={() => handleSignOut()}
+                    >
+                        Sign in
+                    </NavLink>
+                </li>
+            )
         }
     }
 
@@ -75,7 +82,9 @@ const Navbar = () => {
         <nav className='flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-light top-0 shadow-md bg-sky-950 text-white'>
             <ul className='flex items-center gap-3'>
                 <li className='font-semibold text-lg'>
-                <NavLink to='/'>Shop-react</NavLink>
+                <NavLink to={`${isUserSignOut ? '/sign-in' : '/'}`}>
+                    Shop-react
+                </NavLink>
                 </li>
                 {[
                     { path: '/', label: 'All' },

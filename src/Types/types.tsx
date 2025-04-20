@@ -59,6 +59,12 @@ export interface ProductState {
   setSearchByCategory: Setter<string | null>;
 }
 
+//Interface para AppRoutes
+export interface RouteConfig {
+  path: string;
+  element: React.ReactNode;
+}
+
 // Estado principal del contexto de la app (Shopping Cart)
 export interface ShoppingCartContextType extends UIState, CartState, ProductState {
   count: number;

@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context/context";
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
-import { Product } from "../../types/types";
+import { Product } from "../../Types/types";
 
 const Card: React.FC<Product> = ({id, title, price, category, image, description }) => {
   const context = useContext(ShoppingCartContext)
