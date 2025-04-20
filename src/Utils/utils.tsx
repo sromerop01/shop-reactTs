@@ -20,7 +20,7 @@ export const initializeLocalStorage = () => {
     parsedSignOut = JSON.parse(signOutInLocalStorage)
   }
 
-};
+}
 
 export const filteredItemsByTitle = (items: Product[] | null, searchByTitle: string | null) => {
   if (!items || !searchByTitle) return items || [];

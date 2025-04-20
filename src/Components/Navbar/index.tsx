@@ -1,10 +1,10 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { ShoppingCartContext } from "../../Context/context";
-import { ShoppingCartIcon } from '@heroicons/react/24/outline';
+import ShoppingCart from '../ShoppingCart';
 
 const Navbar = () => {
-    const { cartProducts, setSearchByCategory, signOut, setSignOut, account } = useContext(ShoppingCartContext)
+    const { setSearchByCategory, signOut, setSignOut, account } = useContext(ShoppingCartContext)
     const location = useLocation();
 
     //SignOut
@@ -109,8 +109,7 @@ const Navbar = () => {
             <ul className='flex items-center gap-3'>
                 {renderView()}
                 <li className='flex items-center'>
-                    <ShoppingCartIcon className='h-6 w-6 text-sky-700'></ShoppingCartIcon>
-                    <div>{cartProducts.length}</div>
+                    <ShoppingCart />
                 </li>
             </ul>
         </nav>

@@ -5,7 +5,7 @@ import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
 import { Product } from "../../Types/types";
 
 const Card: React.FC<Product> = ({id, title, price, category, image, description }) => {
-  const { count, setCount, toggleProductDetail,isProductDetailOpen, setProductToShow, cartProducts, setCartProducts, toggleCheckoutSideMenu,isCheckoutSideMenu} = useContext(ShoppingCartContext)
+  const { count, setCount, toggleProductDetail, setProductToShow, cartProducts, setCartProducts, toggleCheckoutSideMenu,isCheckoutSideMenu} = useContext(ShoppingCartContext)
 
   const showProduct = (ProductDetail: Product) => {
     if (isCheckoutSideMenu){
@@ -19,9 +19,6 @@ const Card: React.FC<Product> = ({id, title, price, category, image, description
     event.stopPropagation()
     setCount(count + 1)
     setCartProducts([...cartProducts, productData])
-    if (isProductDetailOpen){
-      toggleProductDetail()
-    }
     if (!isCheckoutSideMenu) {
       toggleCheckoutSideMenu()
     }
