@@ -11,8 +11,8 @@ function SignIn() {
   const form = useRef(null)
 
   //Account
-  const accountSignIn = localStorage.getItem('account')
-  const parsedAccount = JSON.parse(accountSignIn || '{}')
+  const accountLocalStorage = localStorage.getItem('account')
+  const parsedAccount = JSON.parse(accountLocalStorage || '{}')
   //Has an Account
   const noAccountInlocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
   const noAccountInlocalState = account ? Object.keys(account).length === 0 : true
@@ -55,6 +55,7 @@ function SignIn() {
             to='/'>
               <button
                 className=' bg-sky-950 text-white w-full rounded-lg py-3 mt-4 mb-2'
+                onClick={() => handleSignIn()}
                 disabled={!hasUserAnAccount}>
                 Log in
               </button>

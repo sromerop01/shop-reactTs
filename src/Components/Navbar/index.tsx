@@ -9,12 +9,12 @@ const Navbar = () => {
     const location = useLocation();
 
     //SignOut
-    const signOutNavBar = localStorage.getItem('sign-out')
-    const parsedSignOut = JSON.parse(signOutNavBar ?? 'false')
+    const signOutLocalStorage = localStorage.getItem('sign-out')
+    const parsedSignOut = JSON.parse(signOutLocalStorage ?? 'false')
     const isUserSignOut = signOut || parsedSignOut
     //Account
-    const accountSignIn = localStorage.getItem('account')
-    const parsedAccount = JSON.parse(accountSignIn || '{}')
+    const accountLocalStorage = localStorage.getItem('account')
+    const parsedAccount = JSON.parse(accountLocalStorage || '{}')
     //Has an Account
     const noAccountInlocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
     const noAccountInlocalState = account ? Object.keys(account).length === 0 : true
