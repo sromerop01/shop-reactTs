@@ -41,7 +41,7 @@ const Navbar = () => {
         if (hasUserAnAccount && !isUserSignOut) {
             return(
                 <>
-                <li className='text-white/70'>sromerop2001@gmail.com</li>
+                <li className='text-white/70'>{parsedAccount?.email}</li>
                 {[
                     { path: '/my-orders', label: 'My Orders' },
                     { path: '/my-account', label: 'My Account' },

@@ -67,7 +67,7 @@ const Card: React.FC<Product> = ({id, title, price, category, image, description
         />
         {renderIcon(id)}
       </figure>
-      <p className="flex justify-between px-2 overflow-hidden">
+      <p className="flex justify-between items-center px-2 overflow-hidden">
         <span className="text-xs font-light truncate w-4/5">{title}</span>
         <span className="text-lg font-medium">${price}</span>
       </p>
