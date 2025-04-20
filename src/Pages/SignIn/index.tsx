@@ -105,7 +105,7 @@ function SignIn() {
             type='text'
             id='password'
             name='password'
-            defaultValue={parsedAccount?.email}
+            defaultValue={parsedAccount?.password}
             placeholder='************'
             className='rounded-lg border border-sky-950 placeholder:font-light placeholder:text-sm
                       placeholder:text-sky-950/60 focus:outline-none py-2 px-4'
