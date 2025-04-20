@@ -1,10 +1,10 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
-import { ShoppingCardContext } from "../../Context/context";
+import { ShoppingCartContext } from "../../Context/context";
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
-    const context = useContext(ShoppingCardContext)
+    const context = useContext(ShoppingCartContext)
     const { cartProducts, setSearchByCategory, signOut,setSignOut } = context;
     const location = useLocation();
 

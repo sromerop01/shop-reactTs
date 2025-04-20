@@ -1,5 +1,5 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
-import { ShoppingCardProvider } from '../../Context/shoppingCardProvider'
+import { ShoppingCartProvider } from '../../Context/shoppingCartProvider'
 
 import Home from '../Home'
 import MyAccount from '../MyAccount'
@@ -42,13 +42,13 @@ function App() {
 
   return (
     <>
-      <ShoppingCardProvider>
+      <ShoppingCartProvider>
         <BrowserRouter>
           <Navbar/>
           <AppRoutes/>
           <CheckoutSideMenu/>
         </BrowserRouter>
-      </ShoppingCardProvider>
+      </ShoppingCartProvider>
     </>
   )
 }

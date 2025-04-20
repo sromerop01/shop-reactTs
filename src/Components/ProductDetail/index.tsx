@@ -1,10 +1,10 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
-import { ShoppingCardContext } from "../../Context/context";
+import { ShoppingCartContext } from "../../Context/context";
 import { useContext } from 'react';
 
 
 const ProductDetail = () => {
-    const context = useContext(ShoppingCardContext)
+    const context = useContext(ShoppingCartContext)
     const { isProductDetailOpen, toggleProductDetail, productToShow } = context;
     return(
         <aside 

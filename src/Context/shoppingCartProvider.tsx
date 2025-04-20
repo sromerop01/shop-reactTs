@@ -1,37 +1,15 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react';
 import { Product, Order } from '../types/types';
-import { ShoppingCardContext } from './context';
-import { filteredItemsByTitle, filteredItemsByCategory } from '../Utils/utils';
+import { ShoppingCartContext } from './context';
+import { filteredItemsByTitle, filteredItemsByCategory, initializeLocalStorage } from '../Utils/utils';
 
 interface Props {
   children: ReactNode;
 }
 
-export const initializeLocalStorage = () => {
-  const accountInLocalStorage = localStorage.getItem('account')
-  const signOutInLocalStorage = localStorage.getItem('sign-out')
-  let parsedAccount
-  let parsedSignOut
-
-  if (!accountInLocalStorage){
-    localStorage.setItem('account', JSON.stringify({}))
-    parsedAccount ={}
-  } else {
-    parsedAccount = JSON.parse(accountInLocalStorage)
-  }
-
-  if (!signOutInLocalStorage) {
-    localStorage.setItem('sign-out', JSON.stringify(false))
-    parsedSignOut = false
-  } else {
-    parsedSignOut = JSON.parse(signOutInLocalStorage)
-  }
-
-};
-
-export const ShoppingCardProvider = ({ children }: Props) => {
+export const ShoppingCartProvider = ({ children }: Props) => {
     // Inicializar localStorage
-
+    initializeLocalStorage()
     //My account
     const [account, setAccount] = useState({
       name: '',
@@ -151,7 +129,7 @@ export const ShoppingCardProvider = ({ children }: Props) => {
     }, [items, searchByTitle, searchByCategory, filterBy]);
 
     return(
-        <ShoppingCardContext.Provider value={{
+        <ShoppingCartContext.Provider value={{
             count,
             setCount,
             isProductDetailOpen,
@@ -176,6 +154,6 @@ export const ShoppingCardProvider = ({ children }: Props) => {
             setSignOut
         }}>
             {children}
-        </ShoppingCardContext.Provider>
+        </ShoppingCartContext.Provider>
     );
 };

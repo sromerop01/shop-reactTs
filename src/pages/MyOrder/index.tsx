@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCardContext } from "../../Context/context";
+import { ShoppingCartContext } from "../../Context/context";
 import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid';
 import Layout from '../../Components/Layout'
 import OrderCard from '../../Components/OrderCard';
 
 function MyOrder() {
-  const context = useContext(ShoppingCardContext)
+  const context = useContext(ShoppingCartContext)
   const { order } = context
   
   const currentPath = window.location.pathname

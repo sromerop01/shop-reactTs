@@ -1,12 +1,12 @@
 import { useContext } from 'react'
-import { ShoppingCardContext } from "../../Context/context";
+import { ShoppingCartContext } from "../../Context/context";
 
 import Layout from '../../Components/Layout'
 import Card from '../../Components/Card'
 import ProductDetail from '../../Components/ProductDetail'
 
 function Home() {
-  const context = useContext(ShoppingCardContext)
+  const context = useContext(ShoppingCartContext)
   const { setSearchByTitle, filteredItems } = context
 
   const renderView = () => {

@@ -1,11 +1,11 @@
 import React from "react";
 import { useContext } from "react";
-import { ShoppingCardContext } from "../../Context/context";
+import { ShoppingCartContext } from "../../Context/context";
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
 import { Product } from "../../types/types";
 
 const Card: React.FC<Product> = ({id, title, price, category, image, description }) => {
-  const context = useContext(ShoppingCardContext)
+  const context = useContext(ShoppingCartContext)
   const { count, setCount, toggleProductDetail,isProductDetailOpen, setProductToShow, cartProducts, setCartProducts, toggleCheckoutSideMenu,isCheckoutSideMenu} = context
 
   const showProduct = (ProductDetail: Product) => {

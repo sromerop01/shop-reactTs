@@ -1,5 +1,27 @@
 import { Product } from '../types/types';
 
+export const initializeLocalStorage = () => {
+  const accountInLocalStorage = localStorage.getItem('account')
+  const signOutInLocalStorage = localStorage.getItem('sign-out')
+  let parsedAccount
+  let parsedSignOut
+
+  if (!accountInLocalStorage){
+    localStorage.setItem('account', JSON.stringify({}))
+    parsedAccount ={}
+  } else {
+    parsedAccount = JSON.parse(accountInLocalStorage)
+  }
+
+  if (!signOutInLocalStorage) {
+    localStorage.setItem('sign-out', JSON.stringify(false))
+    parsedSignOut = false
+  } else {
+    parsedSignOut = JSON.parse(signOutInLocalStorage)
+  }
+
+};
+
 export const filteredItemsByTitle = (items: Product[] | null, searchByTitle: string | null) => {
   if (!items || !searchByTitle) return items || [];
   return items.filter(item => item.title?.toLowerCase().includes(searchByTitle.toLowerCase()));
